@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+{% load static %}
+<meta http-equiv="Cache-Control" content="no-cache" />
+
+<link rel="stylesheet" href="{% static 'success.css' %}?v=2">
+
+<html>
+<head>
+    <title>Ошибка</title>
+</head>
+<body>
+    <h1>Ошибка</h1>
+    <p>Произошла ошибка при сохранении данных в базе данных.</p>
+    <nav class="menu">
+                <ul>
+                    <li><a onclick="href='/';">Назад к форме</a></li>
+                </ul>
+    </nav>
+</body>
+</html>
