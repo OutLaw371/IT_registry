@@ -8,6 +8,8 @@ class Project(models.Model):
     phone = models.CharField(max_length=20)
     passport = models.CharField(max_length=20)
     project_name = models.CharField(max_length=255)
+    annotations = models.CharField(max_length=255)
 
     def __str__(self):
         return f"{self.project_name}"
+

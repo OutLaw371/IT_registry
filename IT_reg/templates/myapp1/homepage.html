@@ -1,61 +1,33 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'hm.css' %}?v=2">
 
-<meta http-equiv="Cache-Control" content="no-cache" />
+{% endblock %}
+{% block content %}
+    <form method="POST" action="/save_project">
+        {% csrf_token %}
+        <label for="fio">ФИО:</label><br>
+        <input type="text" id="fio" name="fio" required><br><br>
 
-<link rel="stylesheet" href="{% static 'hm.css' %}?v=2">
+        <label for="course">Курс:</label><br>
+        <input type="text" id="course" name="course" required><br><br>
 
-<html>
-    <head>
-        <title>Реестр IT-проектов студентов</title>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
 
-    </head>
-    <body>
-        <header>
-            <nav class="menu">
-                <ul>
-                    <!--<li><a onclick="href='admin/';"> Реестр</a></li>-->
-                    <li><a onclick="href='projects/';"> Реестр</a></li>
-                </ul>
-            </nav>
+        <label for="phone">Телефон:</label><br>
+        <input type="text" id="phone" name="phone" required><br><br>
 
-        <div class="hero">
+        <label for="passport">Паспорт:</label><br>
+        <input type="text" id="passport" name="passport" required><br><br>
 
-            <h1>Реестр IT-проектов студентов</h1>
+        <label for="project_name">Название проекта:</label><br>
+        <input type="text" id="project_name" name="project_name" required><br><br>
 
-        </div>
+        <label for="annotations">Аннотация:</label><br>
+        <textarea id="annotations" name="annotations" rows="10" cols="50" required style="width:580px"></textarea><br><br>
 
-        </header>
-
-<!--        <nav>
-                <ul>
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="mycart/">Корзина</a></li>
-                </ul>
-
-            </nav>-->
-        <form method="POST" action="/save_project">
-            {% csrf_token %}
-            <label for="fio">ФИО:</label><br>
-            <input type="text" id="fio" name="fio" required><br><br>
-
-            <label for="course">Курс:</label><br>
-            <input type="text" id="course" name="course" required><br><br>
-
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
-
-            <label for="phone">Телефон:</label><br>
-            <input type="text" id="phone" name="phone" required><br><br>
-
-            <label for="passport">Паспорт:</label><br>
-            <input type="text" id="passport" name="passport" required><br><br>
-
-            <label for="project_name">Название проекта:</label><br>
-            <input type="text" id="project_name" name="project_name" required><br><br>
-
-            <input type="submit" value="Сохранить">
-        </form>
-
-    </body>
-</html>
+        <input type="submit" value='Сохранить'>
+    </form>
+{% endblock %}

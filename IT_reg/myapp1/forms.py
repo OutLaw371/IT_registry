@@ -5,4 +5,4 @@ from .models import Project
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['fio', 'course', 'email', 'phone', 'passport', 'project_name']
+        fields = ['fio', 'course', 'email', 'phone', 'passport', 'project_name', 'annotations']

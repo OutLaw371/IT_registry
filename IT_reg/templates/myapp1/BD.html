@@ -1,72 +1,107 @@
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
+/* Стиль для заголовка h1 */
+h1 {
+    /* Цвет текста */
+    color: #333;
+    /* Отступы внутри */
+    padding: 10px;
 }
 
-h1, nav.menu {
-    text-align: center;
-    padding: 20px 0;
+/* Стиль для таблицы */
+table {
+    /* Ширина 100% */
+    width: 100%;
+    /* Граница между ячейками */
+    border-collapse: collapse;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+/* Стиль для ячеек таблицы */
+td, th {
+    /* Граница серого цвета */
+    border: 1px solid #ccc;
+    /* Отступы внутри */
+    padding: 10px;
 }
 
-li {
-    margin-bottom: 10px;
+/* Стиль для заголовочных ячеек таблицы */
+th {
+    /* Жирный шрифт */
+    font-weight: bold;
+    /* Цвет фона */
+    background-color: #4CAF50;
+    /* Цвет текста */
+    color: white;
 }
 
-.project-item {
-    position: relative;
-    padding-left: 30px;
-}
-
-.project-item:before {
-    content: '•';
-    position: absolute;
-    left: 15px;
-    color: #007BFF;
-    font-size: 20;
-<!--    padding-left: 15px;-->
-}
-
-a {
-    color: #007BFF;
+/* Стиль для ссылок в таблице */
+td a {
+    /* Цвет текста */
+    color: #333;
+    /* Без подчеркивания */
     text-decoration: none;
-    font-size: 20;
 }
 
-a:hover, nav.menu a:hover {
-    color: #0056b3;
+/* Стиль для ссылок в таблице при наведении курсора */
+td a:hover {
+    /* Подчеркивание */
+    text-decoration: underline;
 }
 
-nav.menu ul {
-    margin: 0;
+/* Стиль для навигационного меню под таблицей */
+.menu {
+    /* Отступ сверху */
+    margin-top: 20px;
 }
 
-nav.menu li {
-    display: inline-block;
+.menu ul {
+    list-style: none;
+    display: flex;
 }
 
-nav.menu a {
-    display: block;
+.menu ul li {
+    margin: 0 10px;
+}
+
+.menu ul li a {
+    background-color: #4CAF50;
+    color: white;
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10;
 }
+
+.menu ul li a:hover {
+    background-color: #3c8c3f;
+}
+
 </style>
+{% extends 'base.html' %}
 
+{% block content %}
 <h1>Список проектов</h1>
-<ul>
-{% for project in projects %}
-  <li class="project-item"><a href='/projects/<int:pk>/'>{{ project.project_name }}</a></li>
-
-{% endfor %}
-</ul>
+<table>
+  <tr>
+    <th>Название проекта</th>
+    <th>ФИО</th>
+    <th>Курс</th>
+    <th>Эл. адрес</th>
+    <th>Номер телефона</th>
+    <th>Паспортные данные</th>
+  </tr>
+  {% for project in projects %}
+  <tr>
+    <td><a href='/projects/{{ project.id }}/'><strong>{{ project.project_name }}</strong></a></td>
+    <td>{{ project.fio }}</td>
+    <td>{{ project.course }}</td>
+    <td>{{ project.email }}</td>
+    <td>{{ project.phone }}</td>
+    <td>{{ project.passport }}</td>
+  </tr>
+  {% endfor %}
+</table>
 <nav class="menu">
   <ul><li><a href='/'>Назад к форме</a></li></ul>
 </nav>
+{% endblock %}
