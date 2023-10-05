@@ -1,0 +1,81 @@
+<style>
+/* Стиль для заголовка h1 */
+.data {
+    /* Цвет текста */
+    color: #333;
+    /* Отступы внутри */
+    padding: 10px;
+    /* Рамка вокруг текста */
+    border: 2px solid #4CAF50;
+    /* Скругление углов */
+    border-radius: 10px;
+}
+
+/* Стиль для абзацев p */
+p {
+    /* Отступы внутри */
+    padding: 10px;
+    /* Рамка вокруг текста */
+    border: 1px dashed #ccc;
+}
+
+
+/* Стиль для ссылок a */
+.menu {
+    position: absolute;
+    margin-top: 20;
+}
+
+.delete {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    text-decoration: none;
+    left: 0;
+    margin-right: 20;
+}
+
+.edit {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    text-decoration: none;
+    right: 0;
+}
+
+/* Стиль для ссылок a при наведении курсора */
+a:hover {
+    background-color: #3c8c3f;
+}
+
+.annotations {
+    /* Ширина поля */
+    width: 100%;
+    /* Высота поля */
+    height: 200px;
+    /* Перенос текста на новую строку */
+    word-wrap: break-word;
+}
+
+</style>
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="data">{{ project.project_name }}</h1>
+  <p>ФИО: {{ project.fio }}</p>
+  <p>Курс: {{ project.course }}</p>
+  <p>Email: {{ project.email }}</p>
+  <p>Телефон: {{ project.phone }}</p>
+  <p>Паспорт: {{ project.passport }}</p>
+  <p>Название проекта: {{ project.project_name }}</p>
+  <p class="annotations">Аннотация: {{ project.annotations }}</p>
+  <nav class="menu">
+      <a class="delete" href="/projects/{{ project.id }}/delete/">Удалить проект</a>
+      <a class="edit" href="/projects/{{ project.id }}/edit/">Редактировать проект</a>
+  </nav>
+{% endblock %}

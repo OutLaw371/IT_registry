@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'hm.css' %}?v=2">
+
+{% endblock %}
+{% block content %}
+    <form method="POST" action="/save_project">
+        {% csrf_token %}
+        <label for="fio">ФИО:</label><br>
+        <input type="text" id="fio" name="fio" required><br><br>
+
+        <label for="course">Курс:</label><br>
+        <input type="text" id="course" name="course" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phone">Телефон:</label><br>
+        <input type="text" id="phone" name="phone" required><br><br>
+
+        <label for="passport">Паспорт:</label><br>
+        <input type="text" id="passport" name="passport" required><br><br>
+
+        <label for="project_name">Название проекта:</label><br>
+        <input type="text" id="project_name" name="project_name" required><br><br>
+
+        <label for="annotations">Аннотация:</label><br>
+        <textarea id="annotations" name="annotations" rows="10" cols="50" required style="width:580px"></textarea><br><br>
+
+        <input type="submit" value='Сохранить'>
+    </form>
+{% endblock %}

@@ -1,0 +1,75 @@
+<style>/* Стиль для заголовка h1 */
+h1 {
+    /* Цвет текста */
+    color: #333;
+    /* Отступы внутри */
+    padding: 10px;
+}
+
+/* Стиль для формы */
+form {
+    /* Отступы внутри */
+    padding: 10px;
+}
+
+/* Стиль для полей ввода */
+input[type=text], input[type=email], input[type=number] {
+    /* Ширина 100% */
+    width: 100%;
+    /* Отступы внутри */
+    padding: 10px;
+    /* Граница серого цвета */
+    border: 1px solid #ccc;
+}
+
+/* Стиль для кнопки отправки */
+input[type=submit] {
+    /* Зеленый фон */
+    background-color: #4CAF50;
+    /* Белый цвет текста */
+    color: white;
+    /* Отступы внутри */
+    padding: 10px 20px;
+    /* Граница зеленого цвета */
+    border: 1px solid #4CAF50;
+    /* Скругление углов */
+    border-radius: 5px;
+}
+input[type=submit]:hover{
+    background-color: #3c8c3f;
+}
+
+/* Стиль для ссылки отмены редактирования */
+.otkat {
+    /* Красный фон */
+    background-color: #f44336;
+    /* Белый цвет текста */
+    color: white;
+    /* Отступы внутри */
+    padding: 10px 20px;
+    /* Граница красного цвета */
+    border: 1px solid #f44336;
+    /* Скругление углов */
+    border-radius: 5px;
+    /* Без подчеркивания */
+    text-decoration: none;
+}
+
+/* Стиль для ссылки отмены редактирования при наведении курсора */
+.otkat:hover {
+    /* Темно-красный фон */
+    background-color: #d32f2f;
+}
+</style>
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Редактирование проекта</h1>
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Сохранить изменения">
+</form>
+<a class="otkat" href="/projects/{{ project.id }}/">Отменить редактирование</a>
+{% endblock %}
