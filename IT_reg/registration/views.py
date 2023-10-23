@@ -12,7 +12,7 @@ def register(request):
         confirm_password = request.POST['confirm_password']
         if password == confirm_password:
             try:
-                user = User.objects.create_user(username, password)
+                user = User.objects.create_user(username, password=password)
                 user.save()
                 return redirect('homepage')
             except IntegrityError:

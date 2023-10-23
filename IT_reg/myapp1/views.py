@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import Permission
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
 from .forms import Project, ProjectForm
 
@@ -21,13 +23,18 @@ def save_project(request):
 
         project = Project(fio=fio, course=course, email=email, phone=phone, passport=passport,
                           project_name=project_name, annotations=annotations)
+        project.user = request.user
         project.save()
 
+        permission = get_object_or_404(Permission,
+                                       codename='modify_project')  # получаем разрешение на изменение проекта
+        request.user.user_permissions.add(permission)  # добавляем разрешение текущему пользователю
         return redirect('project_list')
     else:
         return render(request, 'error.html')
 
 
+@permission_required('myapp1.modify_project')
 def delete_project(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
 
@@ -37,10 +44,28 @@ def delete_project(request, project_id):
     return render(request, 'delete_project.html', {'project': project})
 
 
+@permission_required('myapp1.modify_project')
+# def edit_project(request, project_id):
+#     project = get_object_or_404(Project, pk=project_id)
+#     if request.method == 'POST':
+#         form = ProjectForm(request.POST, instance=project)
+#         if form.is_valid():
+#             # Сохранение изменений в базе данных
+#             form.save()
+#
+#             # Перенаправление на страницу с деталями проекта
+#             return redirect('/projects/' + str(project.id) + '/')
+#
+#     # Если метод запроса не POST, то создание формы с объектом проекта в качестве экземпляра
+#     else:
+#         form = ProjectForm(instance=project)
+#
+#     # Отображение страницы с формой для редактирования
+#     return render(request, 'edit_project.html', {'form': form, 'project': project})
 def edit_project(request, project_id):
-    project = get_object_or_404(Project, pk=project_id)
+    project = get_object_or_404(Project, pk=project_id) # получаем объект проекта по id
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, instance=project) # создаем форму с данными проекта
         if form.is_valid():
             # Сохранение изменений в базе данных
             form.save()
@@ -50,7 +75,7 @@ def edit_project(request, project_id):
 
     # Если метод запроса не POST, то создание формы с объектом проекта в качестве экземпляра
     else:
-        form = ProjectForm(instance=project)
+        form = ProjectForm(instance=project) # создаем форму с данными проекта
 
     # Отображение страницы с формой для редактирования
     return render(request, 'edit_project.html', {'form': form, 'project': project})

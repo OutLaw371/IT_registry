@@ -68,8 +68,29 @@ input[type=submit]:hover{
 <h1>Редактирование проекта</h1>
 <form action="" method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  <label for="fio">ФИО:</label><br>
+  <input type="text" id="fio" name="fio" value="{{ form.fio.value }}" required><br><br>
+
+  <label for="course">Курс:</label><br>
+  <input type="text" id="course" name="course" value="{{ form.course.value }}" required><br><br>
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" value="{{ form.email.value }}" required><br><br>
+
+  <label for="phone">Телефон:</label><br>
+  <input type="text" id="phone" name="phone" value="{{ form.phone.value }}" required><br><br>
+
+  <label for="passport">Паспорт:</label><br>
+  <input type="text" id="passport" name="passport" value="{{ form.passport.value }}" required><br><br>
+
+  <label for="project_name">Название проекта:</label><br>
+  <input type="text" id="project_name" name="project_name" value="{{ form.project_name.value }}" required><br><br>
+
+  <label for="annotations">Аннотация:</label><br>
+  <textarea id="annotations" name="annotations" rows="10" cols="50" required>{{ form.annotations.value }}</textarea><br><br>
+
   <input type="submit" value="Сохранить изменения">
 </form>
 <a class="otkat" href="/projects/{{ project.id }}/">Отменить редактирование</a>
 {% endblock %}
+

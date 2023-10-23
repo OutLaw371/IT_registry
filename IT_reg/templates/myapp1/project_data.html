@@ -66,16 +66,24 @@ a:hover {
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="data">{{ project.project_name }}</h1>
-  <p>ФИО: {{ project.fio }}</p>
-  <p>Курс: {{ project.course }}</p>
-  <p>Email: {{ project.email }}</p>
-  <p>Телефон: {{ project.phone }}</p>
-  <p>Паспорт: {{ project.passport }}</p>
-  <p>Название проекта: {{ project.project_name }}</p>
-  <p class="annotations">Аннотация: {{ project.annotations }}</p>
-  <nav class="menu">
-      <a class="delete" href="/projects/{{ project.id }}/delete/">Удалить проект</a>
-      <a class="edit" href="/projects/{{ project.id }}/edit/">Редактировать проект</a>
-  </nav>
+<!--<a class="return" href="/projects/">Назад</a>-->
+<h1 class="data">{{ project.project_name }}</h1>
+<p>ФИО: {{ project.fio }}</p>
+<p>Курс: {{ project.course }}</p>
+<p>Email: {{ project.email }}</p>
+<p>Телефон: {{ project.phone }}</p>
+<p>Паспорт: {{ project.passport }}</p>
+<p>Название проекта: {{ project.project_name }}</p>
+<p class="annotations">Аннотация: {{ project.annotations }}</p>
+
+<nav class="menu">
+
+{% if perms.myapp1.modify_project and project.user == request.user or request.user.is_superuser%}
+
+<a class="delete" href="/projects/{{ project.id }}/delete/">Удалить проект</a>
+
+<a class="edit" href="/projects/{{ project.id }}/edit/">Редактировать проект</a>
+{% endif %}
+</nav>
+
 {% endblock %}
